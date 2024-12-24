@@ -78,6 +78,7 @@ fun AuthorizationButtons(onAuthorizationLevelChange: (AuthorizationLevel) -> Uni
 fun GuestInfo(onAuthorizationLevelChange: (AuthorizationLevel) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "Guest Info", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
+        Text(text = "hi guest. Here's the bulletin:", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
     }
 }
 
@@ -85,6 +86,7 @@ fun GuestInfo(onAuthorizationLevelChange: (AuthorizationLevel) -> Unit, modifier
 fun UserInfo(onAuthorizationLevelChange: (AuthorizationLevel) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "User Info", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
+        Text(text = "something happened with one of our members", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
     }
 }
 
@@ -92,6 +94,7 @@ fun UserInfo(onAuthorizationLevelChange: (AuthorizationLevel) -> Unit, modifier:
 fun AdminInfo(onAuthorizationLevelChange: (AuthorizationLevel) -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "Admin Info", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
+        Text(text = "hello admin", modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp))
     }
 }
 
