@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1038662262896",
+    "project_id": "merfbulletin-b9f70",
+    "storage_bucket": "merfbulletin-b9f70.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038662262896:android:f0e3d3eeac9e16345e94b5",
+        "android_client_info": {
+          "package_name": "com.example.merfbulletin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038662262896-c69cdobp23n7t9h2rfmgcr446loddl43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.merfbulletin",
+            "certificate_hash": "a955a5ac6e475b0883054f2d28c1e0a0e0bf1bf0"
+          }
+        },
+        {
+          "client_id": "1038662262896-b91fm67in34fic19jamrks4jsgkr9d1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk9ppFNw6gjtJXktWNEDPKlkqXNTqWP78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038662262896-b91fm67in34fic19jamrks4jsgkr9d1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
