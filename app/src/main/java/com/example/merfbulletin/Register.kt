@@ -30,6 +30,17 @@ class Register : AppCompatActivity() {
         private const val TAG = "RegisterActivity"
     }
 
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = mAuth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,26 +64,33 @@ class Register : AppCompatActivity() {
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Enter email", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.GONE
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.GONE
                 return@setOnClickListener
             }
 
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
+                    progressBar.visibility = View.GONE
                     if (task.isSuccessful) {
-                        progressBar.visibility = View.GONE
                         Toast.makeText(
                             this@Register,
                             "Account created.",
                             Toast.LENGTH_SHORT,
                         ).show()
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
+                        val exception = task.exception
+                        Log.e(TAG, "Authentication failed: ${exception?.message}")
                         Toast.makeText(
                             this@Register,
-                            "Authentication failed.",
+                            "Authentication failed: ${exception?.message}",
                             Toast.LENGTH_SHORT,
                         ).show()
                     }
