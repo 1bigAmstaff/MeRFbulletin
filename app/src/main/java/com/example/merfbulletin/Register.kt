@@ -25,6 +25,8 @@ class Register : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
     private lateinit var textView: TextView
+    private lateinit var guestLoginButton: Button
+
 
     companion object {
         private const val TAG = "RegisterActivity"
@@ -51,6 +53,8 @@ class Register : AppCompatActivity() {
         buttonReg = findViewById(R.id.btn_register)
         progressBar = findViewById(R.id.progressBar)
         textView = findViewById(R.id.loginNow)
+        guestLoginButton = findViewById(R.id.guest_login)
+
         textView.setOnClickListener {
             val intent = Intent(applicationContext, Login::class.java)
             startActivity(intent)
@@ -96,6 +100,14 @@ class Register : AppCompatActivity() {
                     }
                 }
         }
+
+        guestLoginButton.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("AUTH_LEVEL", AuthorizationLevel.GUEST.name)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     private fun updateUI(user: FirebaseUser?) {

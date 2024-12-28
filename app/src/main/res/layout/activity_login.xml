@@ -46,22 +46,27 @@
 
     <Button
         android:id="@+id/btn_login"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:gravity="center"
+    <Button
         android:id="@+id/registerNow"
         android:text="@string/click_to_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/guest_login"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continue as Guest" />
+
 </LinearLayout>
