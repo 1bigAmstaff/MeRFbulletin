@@ -22,6 +22,7 @@ class Login : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
     private lateinit var textView: TextView
+    private lateinit var guestLoginButton: Button
 
     public override fun onStart() {
         super.onStart()
@@ -44,6 +45,13 @@ class Login : AppCompatActivity() {
         buttonLogin = findViewById(R.id.btn_login)
         progressBar = findViewById(R.id.progressBar)
         textView = findViewById(R.id.registerNow)
+        guestLoginButton = findViewById(R.id.guest_login)
+        guestLoginButton.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("AUTH_LEVEL", AuthorizationLevel.GUEST.name)
+            startActivity(intent)
+            finish()
+        }
 
         progressBar.visibility = View.GONE
 
@@ -69,11 +77,25 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // Check for admin credentials
+            if (email == "oliverocho@gmail.com" && password == "adminpassword") {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                intent.putExtra("AUTH_LEVEL", AuthorizationLevel.ADMIN.name)
+                startActivity(intent)
+                finish()
+                return@setOnClickListener
+            }
+
             mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, MainActivity::class.java)
+                        if (email == "oliverocho@gmail.com") {
+                            intent.putExtra("AUTH_LEVEL", AuthorizationLevel.ADMIN.name)
+                        } else {
+                            intent.putExtra("AUTH_LEVEL", AuthorizationLevel.USER.name)
+                        }
                         startActivity(intent)
                         finish()
                     } else {
