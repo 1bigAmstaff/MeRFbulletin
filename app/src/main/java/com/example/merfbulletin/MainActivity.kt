@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI() {
         val bulletin = Bulletin().getBulletin(authorizationLevel)
-        bulletinTextView.text = bulletin
+        bulletinTextView.text = bulletin.joinToString("\n")
 
         when (authorizationLevel) {
             AuthorizationLevel.GUEST -> {

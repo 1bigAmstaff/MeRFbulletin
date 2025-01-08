@@ -1,15 +1,19 @@
 package com.example.merfbulletin
 
 class Bulletin {
-    fun getBulletin(authLevel: AuthorizationLevel): String {
-        val guestBulletin = "Guest Bulletin: Welcome to our app!"
-        val userBulletin = "User Bulletin: Here are your updates."
-        val adminBulletin = "Admin Bulletin: Here are the admin updates."
+    private val bulletins = mutableListOf<String>()
 
+    init {
+        bulletins.add("First ever bulletin!")
+        bulletins.add("Second bulletin!")
+        bulletins.add("Third bulletin")
+    }
+
+    fun getBulletin(authLevel: AuthorizationLevel): List<String> {
         return when (authLevel) {
-            AuthorizationLevel.GUEST -> guestBulletin
-            AuthorizationLevel.USER -> "$guestBulletin\n$userBulletin"
-            AuthorizationLevel.ADMIN -> "$guestBulletin\n$userBulletin\n$adminBulletin"
+            AuthorizationLevel.GUEST -> listOf(bulletins.last())
+            AuthorizationLevel.USER -> bulletins
+            AuthorizationLevel.ADMIN -> bulletins
         }
     }
 }
