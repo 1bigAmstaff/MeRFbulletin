@@ -1,6 +1,7 @@
 package com.example.merfbulletin
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +12,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var button: Button
     private lateinit var textView: TextView
     private lateinit var bulletinTextView: TextView
@@ -22,12 +24,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         button = findViewById(R.id.logout)
         textView = findViewById(R.id.user_details)
         bulletinTextView = findViewById(R.id.bulletin)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val authLevel = intent.getStringExtra("AUTH_LEVEL")
+        val authLevel = sharedPreferences.getString("AUTH_LEVEL", null)
         authorizationLevel = if (authLevel != null) {
             AuthorizationLevel.valueOf(authLevel)
         } else {
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
+            sharedPreferences.edit().remove("AUTH_LEVEL").apply() // Clear auth level
             val intent = Intent(applicationContext, Login::class.java)
             startActivity(intent)
             finish()

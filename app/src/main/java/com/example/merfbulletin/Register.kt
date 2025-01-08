@@ -1,6 +1,7 @@
 package com.example.merfbulletin
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -26,7 +27,7 @@ class Register : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var textView: TextView
     private lateinit var guestLoginButton: Button
-
+    private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         private const val TAG = "RegisterActivity"
@@ -48,6 +49,7 @@ class Register : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
         mAuth = FirebaseAuth.getInstance()
+        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonReg = findViewById(R.id.btn_register)
@@ -81,22 +83,15 @@ class Register : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     progressBar.visibility = View.GONE
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            this@Register,
-                            "Account created.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        Toast.makeText(this@Register, "Account created.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, MainActivity::class.java)
+                        sharedPreferences.edit().putString("AUTH_LEVEL", AuthorizationLevel.USER.name).apply() // Save auth level
                         startActivity(intent)
                         finish()
                     } else {
                         val exception = task.exception
                         Log.e(TAG, "Authentication failed: ${exception?.message}")
-                        Toast.makeText(
-                            this@Register,
-                            "Authentication failed: ${exception?.message}",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        Toast.makeText(this@Register, "Authentication failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -104,6 +99,7 @@ class Register : AppCompatActivity() {
         guestLoginButton.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             intent.putExtra("AUTH_LEVEL", AuthorizationLevel.GUEST.name)
+            sharedPreferences.edit().putString("AUTH_LEVEL", AuthorizationLevel.GUEST.name).apply() // Save auth level
             startActivity(intent)
             finish()
         }
