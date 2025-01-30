@@ -3,10 +3,16 @@ package com.example.merfbulletin
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
+import com.example.merfbulletin.R
+import com.example.merfbulletin.AuthorizationLevel
+import com.example.merfbulletin.Login
+import com.example.merfbulletin.Bulletin
+import com.example.merfbulletin.ButtonListAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var authorizationLevel: AuthorizationLevel
+    private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         listView = findViewById(R.id.list_view)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        btnLogout = findViewById(R.id.btn_logout)
 
         val authLevel = sharedPreferences.getString("AUTH_LEVEL", null)
         authorizationLevel = if (authLevel != null) {
@@ -42,6 +50,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 AuthorizationLevel.USER
             }
+        }
+
+        btnLogout.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(applicationContext, Login::class.java)
+            startActivity(intent)
+            finish()
         }
 
         updateUI()
