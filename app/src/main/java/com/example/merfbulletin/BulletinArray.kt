@@ -9,12 +9,18 @@ class BulletinArray {
     }
 
     fun getCurr(): String {
-        println(Bulletins.last())
         return Bulletins.last()
 //        return when (authLevel) {
 //            AuthorizationLevel.GUEST -> listOf(Bulletins.first())
 //            AuthorizationLevel.USER -> Bulletins
 //            AuthorizationLevel.ADMIN -> Bulletins
 //        }
+    }
+    fun getArchive(authLevel: AuthorizationLevel): String {
+        return when (authLevel) {
+            AuthorizationLevel.GUEST -> Bulletins.first()
+            AuthorizationLevel.USER -> Bulletins.joinToString("\n")
+            AuthorizationLevel.ADMIN -> Bulletins.joinToString("\n")
+        }
     }
 }

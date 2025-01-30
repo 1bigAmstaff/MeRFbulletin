@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var listView: ListView
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    private lateinit var authorizationLevel: AuthorizationLevel
+    public lateinit var authorizationLevel: AuthorizationLevel
     private lateinit var btnLogout: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         btnLogout = findViewById(R.id.btn_logout)
 
         val authLevel = sharedPreferences.getString("AUTH_LEVEL", null)
+
         authorizationLevel = if (authLevel != null) {
             try {
                 AuthorizationLevel.valueOf(authLevel)
