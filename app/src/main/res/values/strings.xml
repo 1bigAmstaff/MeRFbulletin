@@ -5,6 +5,6 @@
     <string name="password">password</string>
     <string name="register">register</string>
     <string name="click_to_login">Click to login</string>
-    <string name="click_to_register">Click to register</string>
+    <string name="click_to_register">Register</string>
     <string name="logout">logout</string>
 </resources>

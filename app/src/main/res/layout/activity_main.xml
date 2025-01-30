@@ -20,33 +20,18 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <TextView
-            android:id="@+id/user_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Details"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"/>
 
-        <TextView
-            android:id="@+id/bulletin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bulletin"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout" />
-    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
