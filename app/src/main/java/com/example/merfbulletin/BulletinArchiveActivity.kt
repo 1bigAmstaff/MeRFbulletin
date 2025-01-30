@@ -36,6 +36,13 @@ class BulletinArchiveActivity : AppCompatActivity() {
         val bulletinArray = BulletinArray()
         bulletinTextView.text = bulletinArray.getArchive(authorizationLevel)
 
+        val btnBack: Button = findViewById(R.id.btn_back)
+        btnBack.setOnClickListener {
+            val intent = Intent(applicationContext, ListNav::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         val btnLogout: Button = findViewById(R.id.btn_logout)
         btnLogout.setOnClickListener {
             auth.signOut()
