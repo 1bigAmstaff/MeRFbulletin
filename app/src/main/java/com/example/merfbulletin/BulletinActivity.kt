@@ -23,7 +23,7 @@ class BulletinActivity : AppCompatActivity() {
 
         val btnBack: Button = findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
-            val intent = Intent(applicationContext, ListNav::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

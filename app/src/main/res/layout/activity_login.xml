@@ -9,6 +9,14 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo_description"
+        android:src="@drawable/logo" />
     
     <TextView
         android:text="@string/login"
@@ -54,7 +62,7 @@
 
     <Button
         android:id="@+id/registerNow"
-        android:text="@string/click_to_register"
+        android:text="@string/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
