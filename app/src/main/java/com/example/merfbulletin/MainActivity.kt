@@ -8,11 +8,6 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
-import com.example.merfbulletin.R
-import com.example.merfbulletin.AuthorizationLevel
-import com.example.merfbulletin.Login
-import com.example.merfbulletin.Bulletin
-import com.example.merfbulletin.ButtonListAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,8 +58,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        val bulletin = Bulletin().getBulletin(authorizationLevel)
-        val adapter = ButtonListAdapter(this, bulletin)
+        val listNav = ListNav().getList(authorizationLevel)
+        val adapter = ButtonListAdapter(this, listNav)
         listView.adapter = adapter
     }
 }
