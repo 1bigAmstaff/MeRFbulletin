@@ -1,6 +1,7 @@
 package com.example.merfbulletin
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,20 @@ class ButtonListAdapter(private val context: Context, private val buttons: List<
         viewHolder.button.text = buttonText
 
         viewHolder.button.setOnClickListener {
-            // Handle button click
+            when (position) {
+                0 -> {
+                    val intent = Intent(context, BulletinActivity::class.java)
+                    context.startActivity(intent)
+                }
+                1 -> {
+                    val intent = Intent(context, BulletinArchiveActivity::class.java)
+                    context.startActivity(intent)
+                }
+                2 -> {
+                    val intent = Intent(context, PrayerRequestsActivity::class.java)
+                    context.startActivity(intent)
+                }
+            }
         }
 
         return view
