@@ -6,7 +6,6 @@ class ListNav {
     init {
         NavItems.add("This Week's Bulletin")
         NavItems.add("Bulletin Archive")
-        NavItems.add("Prayer Requests")
     }
 
     fun getList(authLevel: AuthorizationLevel): List<String> {
