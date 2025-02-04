@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.merfbulletin"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -66,4 +66,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("com.google.firebase:firebase-analytics:21.0.0")
+
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
+
 }
