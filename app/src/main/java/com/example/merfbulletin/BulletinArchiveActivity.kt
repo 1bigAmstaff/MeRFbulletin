@@ -4,7 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -32,9 +33,22 @@ class BulletinArchiveActivity : AppCompatActivity() {
             AuthorizationLevel.USER
         }
 
-        val bulletinTextView: TextView = findViewById(R.id.bulletin_archive_text)
-        val bulletinArray = BulletinArray()
-        bulletinTextView.text = bulletinArray.getArchive(authorizationLevel)
+        val scrollView: ScrollView = findViewById(R.id.scrollView)
+        val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
+
+        val assetManager = assets
+        val files = assetManager.list("docx") ?: arrayOf()
+
+        for (file in files) {
+            val button = Button(this)
+            button.text = file
+            button.setOnClickListener {
+                val intent = Intent(applicationContext, BulletinActivity::class.java)
+                intent.putExtra("FILE_NAME", file)
+                startActivity(intent)
+            }
+            linearLayout.addView(button)
+        }
 
         val btnBack: Button = findViewById(R.id.btn_back)
         btnBack.setOnClickListener {
