@@ -6,4 +6,6 @@
     <string name="register">Register</string>
     <string name="logout">Logout</string>
     <string name="logo_description">Login Logo</string>
+    <string name="this_week_s_bulletin">This Week\'s Bulletin</string>
+    <string name="bulletin_archive">Bulletin Archive</string>
 </resources>
