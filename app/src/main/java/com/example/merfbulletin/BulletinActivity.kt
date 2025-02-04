@@ -25,7 +25,7 @@ class BulletinActivity : AppCompatActivity() {
         // Load the DOCX file from assets
         val fileName = intent.extras?.getString("FILE_NAME")
         if (fileName != null) {
-            val inputStream: InputStream = assets.open(fileName)
+            val inputStream: InputStream = assets.open("docx/" + fileName)
             val docxContent = readDocxFile(inputStream)
             bulletinTextView.text = docxContent
         } else {

@@ -37,7 +37,7 @@ class BulletinArchiveActivity : AppCompatActivity() {
         val linearLayout: LinearLayout = findViewById(R.id.linearLayout)
 
         val assetManager = assets
-        val files = assetManager.list("") ?: arrayOf()
+        val files = assetManager.list("docx") ?: arrayOf()
 
         for (file in files) {
             val button = Button(this)
