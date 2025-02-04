@@ -23,12 +23,17 @@ class BulletinActivity : AppCompatActivity() {
         val btnLogout: Button = findViewById(R.id.btn_logout)
 
         // Load the DOCX file from assets
-        val inputStream: InputStream = assets.open("MeRF_12-8-2024.docx")
-        val docxContent = readDocxFile(inputStream)
-        bulletinTextView.text = docxContent
+        val fileName = intent.extras?.getString("FILE_NAME")
+        if (fileName != null) {
+            val inputStream: InputStream = assets.open(fileName)
+            val docxContent = readDocxFile(inputStream)
+            bulletinTextView.text = docxContent
+        } else {
+            bulletinTextView.text = "No file name provided"
+        }
 
         btnBack.setOnClickListener {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, BulletinArchiveActivity::class.java)
             startActivity(intent)
             finish()
         }

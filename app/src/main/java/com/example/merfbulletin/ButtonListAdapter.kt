@@ -48,10 +48,6 @@ class ButtonListAdapter(private val context: Context, private val buttons: List<
                     val intent = Intent(context, BulletinArchiveActivity::class.java)
                     context.startActivity(intent)
                 }
-                2 -> {
-                    val intent = Intent(context, PrayerRequestsActivity::class.java)
-                    context.startActivity(intent)
-                }
             }
         }
 
