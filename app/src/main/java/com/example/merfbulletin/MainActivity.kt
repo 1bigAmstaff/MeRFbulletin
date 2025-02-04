@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     public lateinit var authorizationLevel: AuthorizationLevel
     private lateinit var btnLogout: Button
+    private lateinit var btnBulletin: Button
+    private lateinit var btnBulletinArchive: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        listView = findViewById(R.id.list_view)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         btnLogout = findViewById(R.id.btn_logout)
+        btnBulletin = findViewById(R.id.btn_bulletin)
+        btnBulletinArchive = findViewById(R.id.btn_bulletin_archive)
 
         val authLevel = sharedPreferences.getString("AUTH_LEVEL", null)
 
@@ -54,13 +58,33 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        btnBulletin.setOnClickListener {
+            val assetManager = assets
+            val files = assetManager.list("docx") ?: arrayOf()
+            if (files.isNotEmpty()) {
+                val mostRecentFile = files.sorted().last()
+                val intent = Intent(applicationContext, BulletinActivity::class.java)
+                intent.putExtra("FILE_NAME", mostRecentFile)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "No bulletin files found", Toast.LENGTH_SHORT).show()
+            }
+        }
+        btnBulletinArchive.setOnClickListener {
+            val intent = Intent(applicationContext, BulletinArchiveActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         updateUI()
     }
 
     private fun updateUI() {
-        val listNav = ListNav().getList(authorizationLevel)
-        val adapter = ButtonListAdapter(this, listNav)
-        listView.adapter = adapter
+        if (authorizationLevel == AuthorizationLevel.GUEST) {
+            btnBulletinArchive.visibility = Button.GONE
+        } else {
+            btnBulletinArchive.visibility = Button.VISIBLE
+        }
     }
 }

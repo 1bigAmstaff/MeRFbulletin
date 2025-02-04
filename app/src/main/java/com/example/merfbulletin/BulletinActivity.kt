@@ -33,7 +33,7 @@ class BulletinActivity : AppCompatActivity() {
         }
 
         btnBack.setOnClickListener {
-            val intent = Intent(applicationContext, BulletinArchiveActivity::class.java)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
